@@ -1,0 +1,3 @@
+DataBase Update --Local
+
+Update-Database -Verbose -ProjectName Infrastructure.Data.User -StartUpProjectName Infrastructure.Data.User -ConnectionStringName UserContext

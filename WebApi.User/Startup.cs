@@ -53,11 +53,11 @@ namespace WebApi.User
                 defaults: new { id = RouteParameter.Optional }
                 );
 
-            config.Routes.MapHttpRoute(
-               name: "NotFound",
-               routeTemplate: "{*path}",
-               defaults: new { controller = "Error", action = "NotFound" }
-           );
+           // config.Routes.MapHttpRoute(
+           //    name: "NotFound",
+           //    routeTemplate: "{*path}",
+           //    defaults: new { controller = "Error", action = "NotFound" }
+           //);
         }
     }
 }

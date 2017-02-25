@@ -76,7 +76,7 @@ namespace Domain.User.Entities
             {
                 var newGenre = Convert.ToString(genre).ToLower();
 
-                if (!newGenre.IsNullOrWhiteSpace() || (newGenre != "m" && newGenre != "f"))
+                if (newGenre.IsNullOrWhiteSpace() || (newGenre != "m" && newGenre != "f"))
                     ValidationResult.Add("Genre", ValidationMessages.Genre_Not_Found);
             }
         }

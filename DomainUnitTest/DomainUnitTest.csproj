@@ -58,6 +58,12 @@
     <Compile Include="UserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain.User\Domain.User.csproj">
+      <Project>{96D4CFFA-D87F-48D4-8110-E6223779581D}</Project>
+      <Name>Domain.User</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

@@ -18,12 +18,12 @@ namespace Domain.User.Entities
         #region Private fields and Constructors
 
         private ValidationResult _validateResult;
-        public User() { }
+        public User() { _validateResult = new ValidationResult(); }
         public User(string name, string email, string tokenFacebook, string tokenGoogle, Address address, PersonalData personalData, bool guest = false)
+            : this()
         {
             Guest = guest;
             Active = true;
-            _validateResult = new ValidationResult();
 
             if (!guest)
             {
@@ -31,43 +31,19 @@ namespace Domain.User.Entities
                 ValidateName(name);
                 ValidateEmail(email);
                 Name = name;
-                Email = email;           
+                Email = email;
             }
             else
             {
                 Name = "guest_" + Guid.NewGuid().ToString().Replace("-", "");
                 Email = Name + "@fourohfour.com";
-            }           
+            }
 
             AddFacebookToken(tokenFacebook);
             AddGoogleToken(tokenGoogle);
             AddPersonalData(personalData);
             AddAddress(address);
-        }
-
-        public User(string name, string email, string password)
-        {
-
-            _validateResult = new ValidationResult();
-
-            ValidateName(name);
-            ValidateEmail(email);
-            ValidatePassword(password);
-
-            Name = name;
-            Email = email;
-            Password = Cryptography.EncryptSHA1(password);
-            Active = false; //this can be true if we will need to test for development
-            Guest = false;
-        }
-
-        public User(string name, string email, string password, Address address, PersonalData personalData)
-            : this(name, email, password)
-        {
-            _validateResult = new ValidationResult();
-            AddPersonalData(personalData);
-            AddAddress(address);
-        }
+        }     
         #endregion
 
         #region Public fields
@@ -95,7 +71,7 @@ namespace Domain.User.Entities
         }
 
         public ValidationResult ValidationResult =>
-            new ValidationResult().Add(_validateResult, PersonalData.ValidationResult, Address.ValidationResult);
+            new ValidationResult().Add(_validateResult, PersonalData.ValidationResult ?? null, Address.ValidationResult ?? null);
 
         public List<AutenticateToken> AutenticationToken { get; private set; }
         public virtual FacebookUser FacebookUser { get; private set; }
@@ -107,22 +83,12 @@ namespace Domain.User.Entities
         {
             get
             {
-                return ValidationResult.IsValid && Address.IsValid && PersonalData.IsValid;
+                return _validateResult.IsValid && (Address != null && Address.IsValid) &&
+                    (PersonalData != null && PersonalData.IsValid);
             }
         }
         public bool IsNotValid => !IsValid;
-        public void EditUser(string name, string email)
-        {
-            ValidateName(name);
-            ValidateEmail(email);
-
-            Name = name;
-            Email = email;
-        }
-        public void ChangeActive(bool active)
-        {
-            Active = active;
-        }
+              
         public bool IsFacebookUser()
         {
             return FacebookUser.IsNotNull() && FacebookUser.Token.IsNotNull();
@@ -130,32 +96,14 @@ namespace Domain.User.Entities
         public bool IsGoogleUser()
         {
             return GoogleUser.IsNotNull() && GoogleUser.Token.IsNotNull();
-        }
-        public void ChangePassword(string activePassword, string newPassword, string confirmPassword)
-        {
-            if (Password != Cryptography.EncryptSHA1(activePassword) || newPassword != confirmPassword)
-            {
-                ValidationResult.Add("Password", ValidationMessages.Invalid_Password_Match);
-                return;
-            }
-
-            Password = newPassword;
-
-        }
+        }       
         public void AddAddress(Address address)
         {
             if (address.IsNull())
-                 address =  new Address();
+                address = new Address();
 
             Address = address;
-        }
-        public void EditAddress(Address address)
-        {
-            if (Address.IsNull())
-                return;
-
-            Address = Address;
-        }
+        }      
         public void AddFacebookToken(string token)
         {
             if (token.IsNull())
@@ -176,14 +124,7 @@ namespace Domain.User.Entities
                 personalData = new PersonalData();
 
             PersonalData = personalData;
-        }
-        public void EditPersonalData(PersonalData personalData)
-        {
-            if (personalData.IsNull())
-                return;
-
-            PersonalData = personalData;
-        }
+        }       
 
         public AutenticateToken GenerateAutenticationToken()
         {
@@ -200,11 +141,16 @@ namespace Domain.User.Entities
         #region Validates
         private void ValidateName(string name)
         {
-            if (string.IsNullOrWhiteSpace(name) || name.Length < 3)
-                ValidationResult.Add("Name", ValidationMessages.Invalid_Name);
+            if (string.IsNullOrWhiteSpace(name))
+                _validateResult.Add("Name", ValidationMessages.Invalid_Name);
+            else
+            {
+                if (string.IsNullOrWhiteSpace(name) || name.Length < 3)
+                    _validateResult.Add("Name", ValidationMessages.Invalid_Name);
 
-            if (name.Length > 50)
-                ValidationResult.Add("Name", ValidationMessages.Invalid_Name_Exceed);
+                if (name.Length > 50)
+                    _validateResult.Add("Name", ValidationMessages.Invalid_Name_Exceed);
+            }
         }
         private void ValidateEmail(string email)
         {
@@ -213,20 +159,24 @@ namespace Domain.User.Entities
                 var m = new MailAddress(email);
 
                 if (email.Length > 150)
-                    ValidationResult.Add("Email", ValidationMessages.Invalid_Email_Exceed);
+                    _validateResult.Add("Email", ValidationMessages.Invalid_Email_Exceed);
             }
             catch (FormatException)
             {
-                ValidationResult.Add("Email", ValidationMessages.Invalid_Email);
+                _validateResult.Add("Email", ValidationMessages.Invalid_Email);
+            }
+            catch (Exception)
+            {
+                _validateResult.Add("Email", ValidationMessages.Invalid_Email);
             }
         }
         private void ValidatePassword(string password)
         {
             if (string.IsNullOrWhiteSpace(password) || password.Length < 8)
-                ValidationResult.Add("Password", ValidationMessages.Invalid_Password);
+                _validateResult.Add("Password", ValidationMessages.Invalid_Password);
 
             if (password.Length > 20)
-                ValidationResult.Add("Password", ValidationMessages.Invalid_Password_Exceed);
+                _validateResult.Add("Password", ValidationMessages.Invalid_Password_Exceed);
         }
         #endregion
     }

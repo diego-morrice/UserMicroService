@@ -22,8 +22,8 @@ namespace Infrastructure.Data.User.Mapping
 
             Property(t => t.Name)
                 .IsRequired()
-                .HasMaxLength(50)
-                .HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute {IsUnique = true}));
+                .HasMaxLength(50);
+                //.HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute {IsUnique = true}));
 
             Property(t => t.Password)               
                 .HasMaxLength(20);

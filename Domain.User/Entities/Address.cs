@@ -86,7 +86,7 @@ namespace Domain.User.Entities
 
         private void ValidateAddress(string address, string addressType)
         {
-            if (!address.IsNullOrWhiteSpace() && address.Length > 150)
+            if (!address.IsNullOrWhiteSpace() && address.Length > 50)
                 ValidationResult.Add("Address", string.Format(ValidationMessages.Invalid_Address_Exceed, addressType));
         }
 

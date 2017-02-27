@@ -85,7 +85,7 @@ namespace Application.User
                 Username = user.Name,
                 email = user.Email,
                 FullName = user.PersonalData.FullName,
-                Genre = user.PersonalData.Genre,
+                Genre = user.PersonalData.Gender,
                 BirthDate = user.PersonalData.BirthDate,
                 PhoneNumber = user.PersonalData.PhoneNumber,
                 Country = user.Address.Country,

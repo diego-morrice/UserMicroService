@@ -97,16 +97,16 @@ namespace Domain.User.i18n {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The provided genre not found..
+        ///   Looks up a localized string similar to The provided gender not found..
         /// </summary>
-        internal static string Genre_Not_Found {
+        internal static string Gender_Not_Found {
             get {
-                return ResourceManager.GetString("Genre_Not_Found", resourceCulture);
+                return ResourceManager.GetString("Gender_Not_Found", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The length address provided(0) exceeds supported limit(150) allowed..
+        ///   Looks up a localized string similar to The length address provided(0) exceeds supported limit(60) allowed..
         /// </summary>
         internal static string Invalid_Address_Exceed {
             get {

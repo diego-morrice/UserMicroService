@@ -16,7 +16,7 @@ namespace Infrastructure.Data.User.Mapping
                 .IsOptional()
                 .HasMaxLength(150);
 
-            Property(t => t.Genre)
+            Property(t => t.Gender)
                 .IsOptional();              
 
             Property(t => t.PhoneNumber)

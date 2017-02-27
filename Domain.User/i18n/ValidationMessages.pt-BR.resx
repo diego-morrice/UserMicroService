@@ -133,7 +133,7 @@
     <value>O genero informado é não encontrado.</value>
   </data>
   <data name="Invalid_Address_Exceed" xml:space="preserve">
-    <value>O tamanho do endereço fornecido(0) é maior que o tamanho permitido(150),</value>
+    <value>O tamanho do endereço fornecido(0) é maior que o tamanho permitido(60),</value>
   </data>
   <data name="Invalid_City_Exceed" xml:space="preserve">
     <value>O tamanho da cidade fornecida é maior que o permitido(50).</value>

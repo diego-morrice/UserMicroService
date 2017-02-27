@@ -133,7 +133,7 @@
     <value>The provided genre not found.</value>
   </data>
   <data name="Invalid_Address_Exceed" xml:space="preserve">
-    <value>The length address provided(0) exceeds supported limit(150) allowed.</value>
+    <value>The length address provided(0) exceeds supported limit(60) allowed.</value>
   </data>
   <data name="Invalid_City_Exceed" xml:space="preserve">
     <value>The length city provided exceeds supported limit(50) allowed.</value>

@@ -106,7 +106,7 @@ namespace Domain.User.i18n {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The length address provided(0) exceeds supported limit(150) allowed..
+        ///   Looks up a localized string similar to The length address provided(0) exceeds supported limit(60) allowed..
         /// </summary>
         internal static string Invalid_Address_Exceed {
             get {

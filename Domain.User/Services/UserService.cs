@@ -37,7 +37,7 @@ namespace Domain.User.Services
             user = result;
             return ValidationResult;
         }
-        public ValidationResult Save(Entities.User user)
+        private ValidationResult Save(Entities.User user)
         {
             if (user == null)
                 return ValidationResult.Add("Account", ValidationMessages.Account_Not_Found);
@@ -49,7 +49,8 @@ namespace Domain.User.Services
 
             _userRepository.Save(user);
 
-            if (isNewUser) DomainEvent.Raise(new UserCreatedEvent(user.Id, user.Name, user.Email));
+            //Raise a event that will notify someone that a user has created
+            //if (isNewUser) DomainEvent.Raise(new UserCreatedEvent(user.Id, user.Name, user.Email));
 
             return ValidationResult;
         }

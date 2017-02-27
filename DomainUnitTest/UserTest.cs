@@ -53,6 +53,8 @@ namespace DomainUnitTest
             Assert.IsFalse(user.IsValid);
         }
 
+
+
         [TestMethod]
         public void Create_Invalid_User_Bad_Email()
         {

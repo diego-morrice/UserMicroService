@@ -35,7 +35,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=3.3.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.3.3.2\lib\net45\SimpleInjector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleInjector.Extensions.LifetimeScoping, Version=3.3.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.Extensions.LifetimeScoping.3.3.2\lib\net40-client\SimpleInjector.Extensions.LifetimeScoping.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -63,6 +80,26 @@
       <Project>{96D4CFFA-D87F-48D4-8110-E6223779581D}</Project>
       <Name>Domain.User</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.CrossCutting.InversionOfControl\Infrastructure.CrossCutting.InversionOfControl.csproj">
+      <Project>{D7048D8A-0C88-45F8-83CD-42219DD0D31A}</Project>
+      <Name>Infrastructure.CrossCutting.InversionOfControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.CrossCutting.Tools\Infrastructure.CrossCutting.Tools.csproj">
+      <Project>{391C574F-82B0-413E-8DF0-94FD8F676397}</Project>
+      <Name>Infrastructure.CrossCutting.Tools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.CrossCutting.Validation\Infrastructure.CrossCutting.Validation.csproj">
+      <Project>{79F6A266-FE7F-404D-9F74-0DD8F5AD84F6}</Project>
+      <Name>Infrastructure.CrossCutting.Validation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.Data.User\Infrastructure.Data.User.csproj">
+      <Project>{8235E56F-2297-4577-BD28-54952ADC9F1D}</Project>
+      <Name>Infrastructure.Data.User</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -43,29 +43,7 @@ namespace Domain.User.Entities
             AddGoogleToken(tokenGoogle);
             AddPersonalData(personalData);
             AddAddress(address);
-        }
-
-        public User(string name, string email, string password)
-            : this()
-        {
-            ValidateName(name);
-            ValidateEmail(email);
-            ValidatePassword(password);
-
-            Name = name;
-            Email = email;
-            Password = Cryptography.EncryptSHA1(password);
-            Active = false; //this can be true if we will need to test for development
-            Guest = false;
-        }
-
-        public User(string name, string email, string password, Address address, PersonalData personalData)
-            : this(name, email, password)
-        {
-            _validateResult = new ValidationResult();
-            AddPersonalData(personalData);
-            AddAddress(address);
-        }
+        }     
         #endregion
 
         #region Public fields

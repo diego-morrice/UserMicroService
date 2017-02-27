@@ -129,7 +129,7 @@
   <data name="Email_Already_Registered" xml:space="preserve">
     <value>O e-mail fornecido já está registrado.</value>
   </data>
-  <data name="Genre_Not_Found" xml:space="preserve">
+  <data name="Gender_Not_Found" xml:space="preserve">
     <value>O genero informado é não encontrado.</value>
   </data>
   <data name="Invalid_Address_Exceed" xml:space="preserve">

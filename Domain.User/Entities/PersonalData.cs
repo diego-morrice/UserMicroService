@@ -13,14 +13,12 @@ namespace Domain.User.Entities
             ValidationResult = new ValidationResult();
         }
 
-        public PersonalData(string fullName, DateTime birthDate, string genre, string phoneNumber, string countryCode)
+        public PersonalData(string fullName, DateTime birthDate, string gender, string phoneNumber, string countryCode)
             : this()
         {
-            ValidationResult = new ValidationResult();
-
             FullName = fullName;
             BirthDate = birthDate;
-            Genre = genre;
+            Gender = gender;
             PhoneNumber = phoneNumber;
             CountryCode = countryCode;
 
@@ -29,7 +27,7 @@ namespace Domain.User.Entities
 
         public string FullName { get; private set; }
         public DateTime BirthDate { get; private set; }
-        public string Genre { get; private set; }
+        public string Gender { get; private set; }
         public string PhoneNumber { get; private set; }
         public string CountryCode { get; private set; }
 
@@ -47,7 +45,7 @@ namespace Domain.User.Entities
         {
             FullName = fullName;
             BirthDate = birthDate;
-            Genre = Genre;
+            Gender = Gender;
             PhoneNumber = phoneNumber;
             CountryCode = ddiPhoneNumber;
 
@@ -57,7 +55,7 @@ namespace Domain.User.Entities
         {
             ValidatePhoneNumber(PhoneNumber);
             ValidateCountryCode(CountryCode);
-            ValidateGenre(Genre);
+            ValidateGender(Gender);
             ValidateFullName(FullName);
         }
         private void ValidatePhoneNumber(string phoneNumber)
@@ -67,22 +65,22 @@ namespace Domain.User.Entities
         }
         private void ValidateCountryCode(string countryCode)
         {
-            if (!string.IsNullOrWhiteSpace(countryCode) && (countryCode.Length > 1 || countryCode.Length < 3))
+            if (!string.IsNullOrWhiteSpace(countryCode) && (countryCode.Length <= 1 || countryCode.Length >= 3))
                 ValidationResult.Add("CountryCode", ValidationMessages.Invalid_Country_Code);
         }
-        private void ValidateGenre(string genre)
+        private void ValidateGender(string gender)
         {
-            if (genre.IsNotNull())
+            if (gender.IsNotNull())
             {
-                var newGenre = Convert.ToString(genre).ToLower();
+                var newGender = Convert.ToString(gender).ToLower();
 
-                if (newGenre.IsNullOrWhiteSpace() || (newGenre != "m" && newGenre != "f"))
-                    ValidationResult.Add("Genre", ValidationMessages.Genre_Not_Found);
+                if (newGender.IsNullOrWhiteSpace() || (newGender != "m" && newGender != "f"))
+                    ValidationResult.Add("Gender", ValidationMessages.Gender_Not_Found);
             }
         }
         private void ValidateFullName(string fullName)
         {
-            if (!fullName.IsNullOrWhiteSpace() && ((fullName.Length < 2) || fullName.Length > 150))
+            if (!fullName.IsNullOrWhiteSpace() && ((fullName.Length < 2) || fullName.Length > 50))
                 ValidationResult.Add("Name", ValidationMessages.Invalid_Name);
         }
     }
